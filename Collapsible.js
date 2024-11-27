@@ -26,6 +26,12 @@ export default class Collapsible extends Component {
     };
   }
 
+  componentDidMount() {
+    if (!this.props.collapsed) {
+      this._measureContent((height) => this.state.height.setValue(height));
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.collapsed !== this.props.collapsed) {
       this.setState({ measured: false }, () =>
