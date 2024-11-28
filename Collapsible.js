@@ -26,11 +26,10 @@ export default class Collapsible extends Component {
     };
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if (!props.collapsed) {
-      return { measured: false };
+  componentDidMount() {
+    if (!this.props.collapsed) {
+      this._measureContent((height) => this.state.height.setValue(height));
     }
-    return null;
   }
 
   componentDidUpdate(prevProps) {
@@ -193,9 +192,9 @@ export default class Collapsible extends Component {
       animating,
     } = this.state;
     const hasKnownHeight = !measuring && (measured || collapsed);
-    const style = hasKnownHeight && {
+    const style = {
       overflow: 'hidden',
-      height: height,
+      height: hasKnownHeight ? height : 0,
     };
     const contentStyle = {};
     if (measuring) {
