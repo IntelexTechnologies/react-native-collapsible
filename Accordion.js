@@ -12,7 +12,6 @@ const COLLAPSIBLE_PROPS = [
   'easing',
   'style',
   'onAnimationEnd',
-  '_key'
 ];
 
 export default class Accordion extends Component {
