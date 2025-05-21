@@ -85,6 +85,13 @@ export interface CollapsibleProps {
   renderChildrenCollapsed?: boolean;
 
   /**
+  * Check the height of children again and change height if key is changed
+  *
+  * @default undefined
+  */
+  _key?: string | number | boolean | undefined;
+
+  /**
    * Optional styling for the container
    */
   style?: StyleProp<ViewStyle>;
@@ -97,4 +104,4 @@ export interface CollapsibleProps {
   children: React.ReactNode;
 }
 
-export default class Collapsible extends React.Component<CollapsibleProps> {}
+export default class Collapsible extends React.Component<CollapsibleProps> { }

@@ -13,6 +13,7 @@ export default class Collapsible extends Component {
     easing: 'easeOutCubic',
     onAnimationEnd: () => null,
     renderChildrenCollapsed: true,
+    _key: undefined,
   };
 
   constructor(props) {
@@ -27,7 +28,9 @@ export default class Collapsible extends Component {
   }
 
   componentDidMount() {
-    this._measureContent((height) => this.state.height.setValue(height));
+    if (!this.props.collapsed) {
+      this._measureContent((height) => height != null && this.state.height.setValue(height));
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -52,6 +55,10 @@ export default class Collapsible extends Component {
       prevProps.collapsedHeight !== this.props.collapsedHeight
     ) {
       this.state.height.setValue(this.props.collapsedHeight);
+    } else if (prevProps._key !== undefined && this.props._key !== undefined && prevProps._key !== this.props._key) {
+      if (!this.props.collapsed) {
+        this._measureContent((height) => height != null && this.state.height.setValue(height));
+      }
     }
   }
 
